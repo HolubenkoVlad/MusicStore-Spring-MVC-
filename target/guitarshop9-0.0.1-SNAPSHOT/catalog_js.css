@@ -1,0 +1,124 @@
+@charset "utf-8";
+/* Общее свойства*/
+*{
+	margin: 0;
+	padding: 0;
+	font-family:"dancing-script";	
+}
+
+
+
+body{
+	position: relative;
+	width: 100%;
+	background: url(images/backround-guitar.jpg) center center no-repeat;
+	background-size: cover;
+	font-style: white;
+}
+
+a{
+	text-decoration: none;
+	color: aliceblue;
+}
+/*/////////////Header/////////////*/
+.page-header{
+	top:0;
+	width: 100%;
+	height: 50px;
+	background-color: #0B0A0A;
+	border: #000000;
+	opacity: 0.9;
+	
+}
+
+
+nav{
+	background-color: #0B0A0A;
+	height: 70px;
+	border: #000000;
+	width: 100%;
+	float:right;
+	clear: right;
+}
+
+ #navbar ul{
+        display: none;
+        position: absolute;
+        top: 100%;
+      }
+
+ #navbar li:hover ul 
+{ display: block; }
+
+ #navbar, #navbar ul
+{
+   float:right;
+   margin: 0;
+   padding: 0;
+   list-style-type: none;
+}
+
+#navbar 
+{
+   height: 70px;
+   background-color: #0B0A0A;
+   padding-left: 25px;
+   min-width: 470px;
+}
+#navbar li {	 
+   float: left;
+   position: relative;
+   height: 100%;
+}
+#navbar li a {
+   display: block;
+   padding: 6px;
+   width: 200px;
+   color: #fff;
+	font-size: 20px;
+   text-decoration: none;
+   text-align: center;
+	margin-top: 10px;
+}
+
+#navbar li:hover { background-color:#232222; }
+/*//////////////////////////////////////////////////////*/
+
+/*///////////////////Content///////////////////////////*/
+
+.content {
+	width: 100%;
+	height: 100%;
+}
+
+#catalogblock > li{
+	border:1px solid black;
+	width:380px;
+	float:left;
+	}
+
+
+/*/////////////////////////////////////////////*/
+
+/*///////////////Footer///////////////////////*/
+
+.page-footer footer{
+	position: relative;
+	z-index: 1;
+   width: 100%;
+   height: 50px; 
+   border: #000000;
+   bottom:0;
+   background:#0B0A0A;
+   opacity: 0.9;
+}
+
+.page-footer footer p{
+	color: aliceblue;
+	margin-left: 50%;
+	bottom: 0;
+}
+
+
+/*///////////////////////////////////////////*/
+

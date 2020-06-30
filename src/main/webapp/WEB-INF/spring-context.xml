@@ -1,0 +1,65 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+		http://java.sun.com/xml/ns/javaee 
+		http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-3.2.xsd
+		http://www.springframework.org/schema/mvc 
+		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+
+    <context:annotation-config />
+    <context:component-scan base-package="ua.guitarshop" />
+    <mvc:annotation-driven/>
+    <bean id="datasource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/guitardb"/>
+    </bean> 
+    
+  <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="packagesToScan" value="ua.guitarshop.objects" />
+		<property name="persistenceUnitName" value="JPASample" />
+		<property name="dataSource" ref="datasource" />
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+		<property name="jpaDialect" ref="jpaDialect" />
+	</bean>
+ 
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="generateDdl" value="true" />
+                <property name="showSql" value="true" />
+        		<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" />
+	</bean>
+ 
+	<bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+ 
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="dataSource" ref="datasource" />
+		<property name="jpaDialect" ref="jpaDialect" />
+	</bean>
+ 
+	<tx:annotation-driven transaction-manager="transactionManager" />    
+	     
+    <bean id="amqConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+    	<!-- brokerURL, You may have different IP or port -->
+    	<constructor-arg index="0" value="tcp://localhost:61616" />
+  	</bean>    
+  	<bean id="connectionFactory" class="org.springframework.jms.connection.CachingConnectionFactory">
+    	<constructor-arg ref="amqConnectionFactory" />
+  	</bean>
+  	<bean id="orderDestination" class="org.apache.activemq.command.ActiveMQQueue">
+	    <constructor-arg index="0" value="orders.for.approve" />
+  	</bean>
+	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+    	<property name="connectionFactory" ref="connectionFactory" />
+  	</bean>    
+</beans>

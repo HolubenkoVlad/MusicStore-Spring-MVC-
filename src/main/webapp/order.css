@@ -1,0 +1,16 @@
+.mainblock{
+	width:600px;
+	margin:auto;
+}
+
+.mainblock #totalprice{
+	float:right;
+}
+
+#caption{
+	margin-left:40%;
+}
+
+.tab{
+	margin:auto;
+}

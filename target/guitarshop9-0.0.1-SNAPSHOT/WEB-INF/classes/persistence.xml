@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+	<persistence-unit name="JPASample" transaction-type="RESOURCE_LOCAL" >
+		<class>ua.guitarshop.objects.Item</class>
+		<class>ua.guitarshop.objects.User</class>
+		<class>ua.guitarshop.objects.OrderUsers</class>
+		<class>ua.guitarshop.objects.CartItem</class>
+	</persistence-unit>
+</persistence>
